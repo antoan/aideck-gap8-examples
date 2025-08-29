@@ -55,6 +55,8 @@ deck_ip = args.n
 
 print("Connecting to socket on {}:{}...".format(deck_ip, deck_port))
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.settimeout(2.0)                               # don't block forever
+client_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)  # smoother delivery
 client_socket.connect((deck_ip, deck_port))
 print("Socket connected")
 
